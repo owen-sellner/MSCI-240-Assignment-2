@@ -1,3 +1,4 @@
+
 /**
 Owen Sellner
 20915011
@@ -110,7 +111,7 @@ public class DodgeballManager {
 		while (current2.next != null) {
 			if (current2.score == maxScore) {
 				winNum += 1;
-				winName = current1.name;
+				winName = current2.name;
 			}
 			// Moves to the next element
 			current2 = current2.next;
@@ -175,7 +176,7 @@ public class DodgeballManager {
 		}
 		// Increases the thrower's score by one
 		current1.score += 1;
-		
+
 		// Creates a temporary DodgeballNode for the thrower's name and score
 		DodgeballNode temp = new DodgeballNode("");
 		temp.score = current1.score;
@@ -189,29 +190,14 @@ public class DodgeballManager {
 			// Moves to the next element
 			current2 = current2.next;
 		}
-		
-		// Swap the names and scores of the thrower and dodger using the temporary DodgeballNode
+
+		// Swap the names and scores of the thrower and dodger using the temporary
+		// DodgeballNode
 		current1.score = current2.score;
 		current1.name = current2.name;
-				
+
 		current2.score = temp.score;
 		current2.name = temp.name;
-
-		
-
-//        // a - b - c
-//        // d - e - f
-//        current2.next.next = current1.next.next;
-//        System.out.println("+++" + current2.next.next.name);
-////        current1.next.next = temp.next;
-//        temporary();
-//     	// a - b - f
-//        // d - e - c
-//        current2 = current1.next;
-////        current1 = temp;
-//        temporary();
-//        // d - b - f
-//        // a - e - c
 
 	}
 
@@ -226,7 +212,7 @@ public class DodgeballManager {
 		// Creates a node to traverse the list
 		DodgeballNode current = dodgerFirstNode;
 		// Loops through each element in the list
-		while (current.next != null) {
+		while (current != null) {
 			if (current.name.equalsIgnoreCase(dodgerName)) {
 				// Increases the dodger's score by one
 				current.score += 1;
@@ -268,6 +254,35 @@ public class DodgeballManager {
 	}
 
 	public void printSortedScores(PrintStream stream) {
-		// TODO method stub
+		// Initializes an Integer for the max score
+		int maxScore = this.getMaximumScore();
+
+		// Loops through each possible score starting from the maxScore and prints all
+		// the players with a matching score to the PrintStream
+		for (int i = maxScore; i >= 0; i--) {
+			// Searches the throwers
+			// Creates a node to traverse the list
+			DodgeballNode current1 = throwerFirstNode;
+			// Loops through each element in the list
+			while (current1 != null) {
+				if (current1.score == i) {
+					stream.println(current1.name + " " + current1.score);
+				}
+				// Moves to the next element
+				current1 = current1.next;
+			}
+
+			// Searches the dodgers
+			// Creates a node to traverse the list
+			DodgeballNode current2 = dodgerFirstNode;
+			// Loops through each element in the list
+			while (current2 != null) {
+				if (current2.score == i) {
+					stream.println(current2.name + " " + current2.score);
+				}
+				// Moves to the next element
+				current2 = current2.next;
+			}
+		}
 	}
 }
