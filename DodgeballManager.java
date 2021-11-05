@@ -82,6 +82,8 @@ public class DodgeballManager {
 		stream.print(current.name + " " + current.score);
 	}
 
+	// Prints a sentence to the PrintStream identifying the person with the highest
+	// score and what their score is
 	public void printWinner(PrintStream stream) {
 		// Initializes an Integer for the max score
 		int maxScore = this.getMaximumScore();
@@ -159,6 +161,8 @@ public class DodgeballManager {
 		return result;
 	}
 
+	// If both given players are in the game the thrower's score is increased and
+	// they switch spots with the dodger
 	public void hit(String throwerName, String dodgerName) {
 		// Checks if an exception is needed
 		if (throwerName == null || throwerName.equals("") || !throwersContains(throwerName) || dodgerName == null
@@ -177,10 +181,9 @@ public class DodgeballManager {
 		// Increases the thrower's score by one
 		current1.score += 1;
 
-		// Creates a temporary DodgeballNode for the thrower's name and score
-		DodgeballNode temp = new DodgeballNode("");
-		temp.score = current1.score;
-		temp.name = current1.name;
+		// Creates temporary variables for the thrower's name and score
+		int tempScore = current1.score;
+		String tempName = current1.name;
 
 		// Finds the node for dodgerName
 		// Creates a node to traverse the list
@@ -192,15 +195,16 @@ public class DodgeballManager {
 		}
 
 		// Swap the names and scores of the thrower and dodger using the temporary
-		// DodgeballNode
+		// variables
 		current1.score = current2.score;
 		current1.name = current2.name;
 
-		current2.score = temp.score;
-		current2.name = temp.name;
+		current2.score = tempScore;
+		current2.name = tempName;
 
 	}
 
+	// If both given players are in the game the dodger's score is increased
 	public void dodge(String throwerName, String dodgerName) {
 		// Checks if an exception is needed
 		if (throwerName == null || throwerName.equals("") || !throwersContains(throwerName) || dodgerName == null
@@ -223,6 +227,7 @@ public class DodgeballManager {
 
 	}
 
+	// Returns the highest score of all the players in the game
 	public int getMaximumScore() {
 		int maxScore = 0;
 
@@ -253,6 +258,8 @@ public class DodgeballManager {
 		return maxScore;
 	}
 
+	// Prints a list of the players and their scores to the PrintStream from highest
+	// to lowest score
 	public void printSortedScores(PrintStream stream) {
 		// Initializes an Integer for the max score
 		int maxScore = this.getMaximumScore();
